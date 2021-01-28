@@ -1,0 +1,67 @@
+<div class="content-wrapper">
+  <div class="content-block">
+    <div class="content">
+        <div class="user-about">
+        <div class="image">
+        <% if item.user.image.attached? %>
+          <%= image_tag item.user.image %>
+        <% else %>
+          <%= image_tag "nouser.png"%>
+        <% end %>
+        </div> 
+
+        <div class="profile">
+            <div class="name-about">
+              <div class="name">
+                <%= item.user.name %>
+              </div> 
+            </div>
+            
+          <div class="detail">
+            <%= item.user.detail %>
+          </div>
+        </div>
+      </div>
+
+        <% if item.images.attached? %>
+         <div class="images">
+         <% item.images.each do |image| %>
+          <%= image_tag image %>
+          <% end %>
+         </div>
+        <% end %>
+
+        <div class="menu-name">
+        <h2>[メニュー名]<%= item.name %></h2>
+        </div>
+
+        <div class="menu-price">
+          <h2>[価格]<%= item.price %>円</h2>
+          <% if user_signed_in? && item.user_id != current_user.id %>
+           <h3><%= link_to '購入画面に進む', item_orders_path(@item), class:"item-red-btn" %></h3>
+           <% end %>
+        </div>
+
+        <div class="text">
+        <%= item.content %>
+        </div>
+        
+        <div class="action-menu">
+          <div class="comment">
+            <% if user_signed_in? %>
+          <%= form_with url: item_comments_path(item), model: @comment, data: { confirm: '誹謗中傷など、読む人が不快になるような内容は含まれていませんか？' }, local: true do |f| %>
+            <div class="field"><br>
+              <%= f.label :text, "コメント" %><br />
+              <%= f.text_field :text %>
+            </div>
+            <div class="actions">
+              <%= f.submit "送信する", class: "button" %>
+            </div>
+          <% end %>
+         <% end %>
+        </div>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
