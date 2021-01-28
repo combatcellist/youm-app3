@@ -1,0 +1,43 @@
+#registrations-new, #sessions-new {
+  h2 {
+    text-align: center;
+  }
+  input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  .field {
+    margin: 10px 0;
+  }
+  .actions {
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    .button {
+    display       : inline-block;
+    border-radius : 5%;         
+    font-size     : 18pt;       
+    text-align    : center;     
+    cursor        : pointer;     
+    padding       : 12px 12px;  
+    background    : #333;   
+    color         : #ffffff; 
+    line-height   : 1em;         
+    transition    : .3s;       
+    box-shadow    : 6px 6px 3px #666666; 
+    border        : 2px solid #000066;   
+    }
+  .button:hover {
+    box-shadow    : none;       
+    color         : #333;     
+    background    : #ffffff;   
+  }
+ }
+}

@@ -1,0 +1,22 @@
+version: '3' # Dockerのバージョンを指定
+services:
+  db: # データベースサーバ用のコンテナの設定を記述
+    image: mysql:5.7 # コンテナで使用するイメージ名を記述
+    environment:
+      MYSQL_ROOT_PASSWORD: password # 任意のパスワードを設定
+      MYSQL_DATABASE: root # 任意のデータベース名を設定
+    ports:
+      - "4307:4307" # ホストの3306ポートとコンテナの3306ポートを接続する。
+    volumes:
+      - ./db/mysql/volumes:/var/lib/mysql #ホストの./db/mysql/volumesをコンテナ内の/var/lib/mysqlにマウントする。Dockerのコンテナと、ローカルを同期している。コンテナを削除してもデータは永続化する。
+
+  web: # アプリケーションサーバ用のコンテナの設定を記述
+    build: . # docker-compose.ymlと同じ階層にあるDockerfileを使ってimageをbuildするための記述
+    command: bundle exec rails s -p 4000 -b '0.0.0.0' # コンテナ立ち上げ時に起動するコマンド。railsを実行する。
+
+    volumes:
+      - .:/my-app # 作業ディレクトリをコンテナ内の/my-appにマウントする。
+    ports:
+      - "4000:4000" # ホストの3000ポートとコンテナの3000ポートを接続する。
+    depends_on:
+      - db # 依存関係を表している。dbが起動
