@@ -56,7 +56,28 @@
         
         <div class="action-menu">
           <div class="comment">
-            
+            <% if user_signed_in? %>
+          <%= form_with url: item_comments_path(@item), model: @comment, data: { confirm: '誹謗中傷など、読む人が不快になるような内容は含まれていませんか？' },　local: true do |f| %>
+            <div class="field"><br>
+              <%= f.label :text, "コメント" %><br />
+              <%= f.text_field :text %>
+            </div>
+            <div class="actions">
+              <%= f.submit "送信する", class: "button" %>
+            </div>
+          <% end %>
+         <% end %>
+         <ol class="comments_lists">
+            <% if @comments.present? %>
+            <% @comments.each do |comment| %>
+              <li class="comments_list">
+                <%= comment.text %>
+                <%= comment.user.name %>
+                <%= comment.created_at %>
+              <% end %>
+              </li>
+          <% end %>
+         </ol>
        </div>
      </div>
    </div>
