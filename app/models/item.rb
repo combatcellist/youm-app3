@@ -11,5 +11,13 @@ class Item < ApplicationRecord
  has_many_attached   :images
  has_many            :comments, dependent: :destroy
 
+ def self.search(search)
+  if search != ""
+    Item.where('content LIKE(?)', "%#{search}%")
+  else
+    Item.all
+  end
+ end
+
  
 end

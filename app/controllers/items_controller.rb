@@ -38,6 +38,15 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    if @item.destroy
+      redirect_to root_path, notice: "メニューが削除されました"
+    else
+      redirect_to root_path, notice: "メニューを削除できませんでした"
+    end
+  end
+
+  def search
+    @items = Item.search(params[:keyword])
   end
 
   private
