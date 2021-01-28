@@ -1,0 +1,52 @@
+<div class="items-sell-main">
+    <h1 class="items-sell-title">メニューの情報を更新</h1>
+    <%= form_with model:@item, local: true do |f| %>
+    <%= render 'shared/error_messages', model: f.object %>
+
+    <div class="img-upload">
+      <div class="click-upload">
+        <p>
+          クリックして画像ファイルをアップロード
+        </p>
+        <%= f.file_field :images, multiple: true, id:"item-image" %>
+      </div>
+    </div>
+
+    <div class="new-items">
+      <div class="weight-bold-text">
+        メニュー名
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.text_field :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
+      <div class="items-explain">
+        <div class="weight-bold-text">
+          メニューの説明
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :content, class:"items-text", id:"item-info", placeholder:"商品の説明（必須 1,000文字まで）" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+    </div>
+    
+    <div class="sell-price">
+      <div class="weight-bold-text question-text">
+        <span>販売価格<br>(¥300〜9,999,999)</span>
+      </div>
+      <div>
+        <div class="price-content">
+        <div class="price-text">
+            <span>価格</span>
+            <span class="indispensable">必須</span>
+          </div>
+          <span class="sell-yen">¥</span>
+          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
+        </div>
+        </span>
+      </div>
+    </div>
+
+    <div class="sell-btn-contents">
+      <%= f.submit "投稿する", class: "button" %>
+      <%=link_to 'もどる', root_path, class:"back-btn" %>
+    </div>
+ <% end %>
+</div>
