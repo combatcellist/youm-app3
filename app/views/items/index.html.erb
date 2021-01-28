@@ -1,27 +1,41 @@
 <div class="content-wrapper">
   <div class="content-block">
+   <% @items.each do |item| %>
     <div class="content">
       <div class="user-about">
         <div class="image">
-          <%= image_tag "nouser.png" %>
+          <% if item.user.image.attached? %>
+           <%= image_tag item.user.image %>
+          <% else %>
+            <%= image_tag "nouser.png"%>
+          <% end %>
         </div>
         <div class="profile">
           <div class="name-about">
             <div class="name">
-              洋食亭クマガイ
+               <%= item.user.name %>
             </div>
           </div>
+          
           <div class="detail">
-            大正創業の老舗です
+            <%= item.user.detail %>
           </div>
         </div>
       </div>
+      <% if item.images.attached? %>
       <div class="images">
-        <%# <%= image_tag "saien1.jpg" %>
+        <%= link_to item_path(item.id) do %>
+          <% item.images.each do |image| %>
+            <%= image_tag image %>
+          <% end %>
+          </div>
+         <% end %>
+        <% end %>
+        <div class="text">
+       <%= item.content %>
       </div>
-      <div class="text">
-       <p>これはサンプルテキストこれはサンプルテキストこれはサンプルテキスト</p>
       </div>
     </div>
+   <% end %>
   </div>
 </div>
