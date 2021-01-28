@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#items-index {
+#items-index, #items-show{
   .content-wrapper {
     display: flex;
     justify-content: center;
@@ -51,7 +51,7 @@
   }
 }
 
-#items-new {
+#items-new, #items-edit{
   form {
     textarea{
       width: 90%;
